@@ -1,12 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
+import ProfileForm from './ProfileForm'
+import Profile from './Profile'
 
 import './Header.scss'
+
+const alwaysOptions = (
+  <React.Fragment>
+    <Link to="/">Home</Link>
+  </React.Fragment>
+)
 
 const authenticatedOptions = (
   <React.Fragment>
     <Link to="/change-password">Change Password</Link>
     <Link to="/sign-out">Sign Out</Link>
+    <Link to="profile">Create a Profile</Link>
   </React.Fragment>
 )
 
@@ -17,20 +26,16 @@ const unauthenticatedOptions = (
   </React.Fragment>
 )
 
-const alwaysOptions = (
-  <React.Fragment>
-    <Link to="/">Home</Link>
-  </React.Fragment>
-)
-
 const Header = ({ user }) => (
   <header className="main-header">
-    <h1>Uber, But For Taxis</h1>
+    <h1>Swirl4Life</h1>
     <nav>
       { user && <span>Welcome, {user.email}</span>}
-      { user ? authenticatedOptions : unauthenticatedOptions }
       { alwaysOptions }
+      { user ? authenticatedOptions : unauthenticatedOptions }
+
     </nav>
+
   </header>
 )
 

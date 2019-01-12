@@ -64,3 +64,26 @@ export const changePassword = (passwords, user) => {
     })
   })
 }
+
+export const createProfile = (profile, user) => {
+  return fetch(apiUrl + '/profile', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization':`Token token=${user.token}`
+    },
+    body: JSON.stringify({
+      profile: {
+        user:credentials.user,
+        username:credentials.username,
+        profileImage:credentials.profileImage,
+        job: credentials.job,
+        gender: credentials.gender,
+        race: credentials.race,
+        interest: credentials.interest,
+        hobbies: credentials.hobbies,
+        race_preference:credentials.race_preference
+      }
+    })
+  })
+}
