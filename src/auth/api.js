@@ -66,7 +66,7 @@ export const changePassword = (passwords, user) => {
 }
 
 export const createProfile = (profile, user) => {
-  return fetch(apiUrl + '/profile', {
+  return fetch(apiUrl + '/profiles', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -74,15 +74,14 @@ export const createProfile = (profile, user) => {
     },
     body: JSON.stringify({
       profile: {
-        user:credentials.user,
-        username:credentials.username,
-        profileImage:credentials.profileImage,
-        job: credentials.job,
-        gender: credentials.gender,
-        race: credentials.race,
-        interest: credentials.interest,
-        hobbies: credentials.hobbies,
-        race_preference:credentials.race_preference
+        username:user.username,
+        profileImage:user.profileImage,
+        job: user.job,
+        gender: user.gender,
+        race: user.race,
+        interest: user.interest,
+        hobbies: user.hobbies,
+        race_preference:user.race_preference
       }
     })
   })

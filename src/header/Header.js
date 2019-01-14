@@ -15,7 +15,7 @@ const authenticatedOptions = (
   <React.Fragment>
     <Link to="/change-password">Change Password</Link>
     <Link to="/sign-out">Sign Out</Link>
-    <Link to="profile">Create a Profile</Link>
+    <Link to="profiles">Create a Profile</Link>
   </React.Fragment>
 )
 

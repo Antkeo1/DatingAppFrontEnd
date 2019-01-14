@@ -9,9 +9,8 @@ class ProfileForm extends Component {
     super()
     this.state = {
       profile: {
-        user:' ',
         username:' ',
-        profileImage:' ',
+        profileimage:' ',
         job: ' ',
         gender: ' ',
         race: ' ',
@@ -24,10 +23,10 @@ class ProfileForm extends Component {
   }
   createProfile = (event) => {
     console.log('createProfile')
-    fetch('http://localhost:4741/profile', {
+    fetch('http://localhost:4741/profiles', {
       profile: {
         username: this.state.username,
-        profileImage:this.state.profileImage,
+        profileimage:this.state.profileimage,
         job: this.state.job,
         gender: this.state.gender,
         race: this.state.race,
@@ -36,6 +35,8 @@ class ProfileForm extends Component {
         race_preference:this.state.race_preference
       }
     })
+      .then(console.log('success'))
+      .catch(console.error)
   }
   onUserName = event => {
     this.setState({
@@ -47,7 +48,7 @@ class ProfileForm extends Component {
   onProfileImage = event => {
     this.setState({
       profile: {
-        profileImage: event.target.value
+        profileimage: event.target.value
       }
     })
   }
@@ -99,28 +100,29 @@ class ProfileForm extends Component {
       <div className='text-center'>
         <h3>Lets Create your Profile</h3>
         <form onSubmit= {this.createProfile}>
-          {/*<input type='number'
-                placeholder='ID of movie to get'
-                value={this.state.movieIndex}
-                onChange={this.onIdChange}/>
-                */}
+
           <input placeholder='username'
+            type= 'text'
             value= {this.state.profile.username}
             onChange={this.onUserName}/>
 
           <input placeholder='ImageUrl'
-            value={this.state.profile.profileImage}
+            type='text'
+            value={this.state.profile.profileimage}
             onChange={this.onProfileImage} />
 
           <input placeholder='Works at'
+            type='text'
             value={this.state.profile.job}
             onChange={this.onJob} />
 
           <input placeholder='Gender ID'
+            type='text'
             value={this.state.profile.gender}
             onChange={this.onGender} />
 
           <input placeholder='Race'
+            type='text'
             value={this.state.profile.race}
             onChange={this.onRace} />
 
@@ -129,10 +131,12 @@ class ProfileForm extends Component {
             onChange={this.onInterest} />
 
           <input placeholder='Hobbies'
+            type='text'
             value={this.state.profile.hobbies}
             onChange={this.onHobbies} />
 
           <input placeholder='Whats your type'
+            type='text'
             value={this.state.profile.race_preference}
             onChange={this.onRace_preference} />
 
