@@ -58,6 +58,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword flash={this.flash} user={user} />
           )} />
+
           <AuthenticatedRoute user={user }exact path="/profile" render={() => (
             <ProfileForm />
           )}/>

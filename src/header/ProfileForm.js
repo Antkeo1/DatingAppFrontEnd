@@ -10,7 +10,7 @@ class ProfileForm extends Component {
     this.state = {
       profile: {
         user:' ',
-        username:'',
+        username:' ',
         profileImage:' ',
         job: ' ',
         gender: ' ',
@@ -23,70 +23,81 @@ class ProfileForm extends Component {
     }
   }
   createProfile = (event) => {
-    const profileValid = this.state.user
-    if (profileValid) {
-      axios.post(`http://localhost:4741/profile/${this.state.profile}`, {
-        profile: {
-          username: ' ',
-          profileImage:' ',
-          job: ' ',
-          gender: ' ',
-          race: ' ',
-          interest: ' ',
-          hobbies: ' ',
-          race_preference:' '
-        }
-      })
-        .then(res => this.setState({message: `made a new profile: ${res.data.profile.user}`}))
-        .catch(console.error)
-    } else {
-      this.setState({ message: 'you have invalid form data!'})
-    }
+    console.log('createProfile')
+    fetch('http://localhost:4741/profile', {
+      profile: {
+        username: this.state.username,
+        profileImage:this.state.profileImage,
+        job: this.state.job,
+        gender: this.state.gender,
+        race: this.state.race,
+        interest: this.state.interest,
+        hobbies: this.state.hobbies,
+        race_preference:this.state.race_preference
+      }
+    })
   }
   onUserName = event => {
     this.setState({
-      username: event.target.value
+      profile: {
+        username: event.target.value
+      }
     })
   }
   onProfileImage = event => {
     this.setState({
-      profileImage: event.target.value
+      profile: {
+        profileImage: event.target.value
+      }
     })
   }
   onJob = event => {
     this.setState({
-      job: event.target.value
+      profile: {
+        job: event.target.value
+      }
     })
   }
   onGender = event => {
     this.setState({
-      gender: event.target.value
+      profile: {
+        gender: event.target.value
+      }
     })
   }
   onRace = event => {
     this.setState({
-      race: event.target.value
+      profile: {
+        race: event.target.value
+      }
     })
   }
   onInterest = event => {
     this.setState({
-      interest: event.target.value
+      profile: {
+        interest: event.target.value
+      }
     })
   }
   onHobbies = event => {
     this.setState({
-      hobbies: event.target.value
+      profile: {
+        hobbies: event.target.value
+      }
     })
   }
   onRace_preference = event => {
     this.setState({
-      race_preference: event.target.value
+      profile: {
+        race_preference: event.target.value
+      }
     })
   }
 
   render() {
     return (
       <div className='text-center'>
+        <h3>Lets Create your Profile</h3>
         <form onSubmit= {this.createProfile}>
           {/*<input type='number'
                 placeholder='ID of movie to get'
@@ -94,35 +105,35 @@ class ProfileForm extends Component {
                 onChange={this.onIdChange}/>
                 */}
           <input placeholder='username'
-            value= {this.state.username}
+            value= {this.state.profile.username}
             onChange={this.onUserName}/>
 
           <input placeholder='ImageUrl'
-            value={this.state.ProfileImage}
+            value={this.state.profile.profileImage}
             onChange={this.onProfileImage} />
 
           <input placeholder='Works at'
-            value={this.state.Job}
-            onChange={this.state.onJob} />
+            value={this.state.profile.job}
+            onChange={this.onJob} />
 
           <input placeholder='Gender ID'
-            value={this.state.Gender}
+            value={this.state.profile.gender}
             onChange={this.onGender} />
 
           <input placeholder='Race'
-            value={this.state.Race}
+            value={this.state.profile.race}
             onChange={this.onRace} />
 
           <input placeholder='Interest'
-            value={this.state.Interest}
+            value={this.state.profile.interest}
             onChange={this.onInterest} />
 
           <input placeholder='Hobbies'
-            value={this.state.Hobbies}
+            value={this.state.profile.hobbies}
             onChange={this.onHobbies} />
 
           <input placeholder='Whats your type'
-            value={this.state.Race_preference}
+            value={this.state.profile.race_preference}
             onChange={this.onRace_preference} />
 
           <input type='submit'
