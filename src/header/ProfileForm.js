@@ -22,8 +22,7 @@ class ProfileForm extends Component {
     }
   }
   createProfile = (event) => {
-    console.log('createProfile')
-    fetch('http://localhost:4741/profiles', {
+    axios.post('http://localhost:4741/profiles', {
       profile: {
         username: this.state.username,
         profileimage:this.state.profileimage,
@@ -37,6 +36,7 @@ class ProfileForm extends Component {
     })
       .then(console.log('success'))
       .catch(console.error)
+    console.log(event)
   }
   onUserName = event => {
     this.setState({
