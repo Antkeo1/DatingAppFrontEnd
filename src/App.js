@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import './App.scss'
 import { Route, Link } from 'react-router-dom'
-import ProfileForm from './header/ProfileForm'
-import Profile from './header/Profile'
+
 import AuthenticatedRoute from './auth/components/AuthenticatedRoute'
 import Header from './header/Header'
 import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
+import AllProfile from './header/AllProfile'
+import Home from './header/Home'
 
 class App extends Component {
   constructor () {
@@ -58,10 +59,12 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword flash={this.flash} user={user} />
           )} />
-
-          <AuthenticatedRoute user={user } exact path="/profiles" render={() => (
-            <ProfileForm flash={this.flash} user={user}/>
+          
+          <AuthenticatedRoute user={user} exact path="/" render={() => (
+            <Home flash={this.flash} user={user}/>
           )}/>
+
+
 
         </main>
       </React.Fragment>

@@ -74,14 +74,14 @@ export const createProfile = (profile, user) => {
     },
     body: JSON.stringify({
       profile: {
-        username: user.username,
-        profileImage:user.profileImage,
-        job: user.job,
-        gender: user.gender,
-        race: user.race,
-        interest: user.interest,
-        hobbies: user.hobbies,
-        race_preference:user.race_preference
+        username: profile.username,
+        profileImage: profile.profileImage,
+        job: profile.job,
+        gender: profile.gender,
+        race: profile.race,
+        interest: profile.interest,
+        hobbies: profile.hobbies,
+        race_preference: profile.race_preference
       }
     })
   })

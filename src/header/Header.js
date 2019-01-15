@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
-import ProfileForm from './ProfileForm'
-import Profile from './Profile'
+import NewProfile from './NewProfile'
+
 
 import './Header.scss'
 
