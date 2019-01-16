@@ -7,7 +7,8 @@ const AllProfile = (props) => {
     console.log(props)
     return(
       <div key={profile.id}>
-        <Profile profile={profile} handleDelete={props.handleDelete}/>
+        <Profile profile={profile} handleDelete={props.handleDelete}
+          handleUpdate={props.handleUpdate}/>
       </div>
     )
   })

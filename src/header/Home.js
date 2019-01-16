@@ -9,6 +9,8 @@ class Home extends Component {
     this.state = {
       profiles: []
     }
+    this.handleUpdate = this.handleUpdate.bind(this)
+    this.updateProfile = this.updateProfile.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.deleteProfile= this.deleteProfile.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -52,12 +54,34 @@ class Home extends Component {
         }
       }).then((response) => {
       this.deleteProfile
+      console.log('delete success')
     })
   }
   deleteProfile(id){
     newProfile = this.state.profiles.filter((profile) => profile.id !== id)
     this.setState({
       profiles: newProfile
+    })
+  }
+  // to update
+  handleUpdate(profile){
+    fetch(`http://localhost:4741/profiles/${profile.id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify({profile: profile}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Token token=${this.props.user.token}`
+        }
+      }).then((response) => {
+      this.updateProfile(profile)
+    })
+  }
+  updateProfile(profile){
+    const newProfiles = this.state.profiles.filter((p) => p.id !== profile.id)
+    newProfiles.push(profile)
+    this.setState({
+      profiles: newProfiles
     })
   }
 
@@ -70,7 +94,8 @@ class Home extends Component {
     return(
       <div>
         <NewProfile handleFormSubmit={this.handleFormSubmit} />
-        <AllProfile profiles={this.state.profiles} handleDelete={this.handleDelete}/>
+        <AllProfile profiles={this.state.profiles} handleDelete={this.handleDelete}
+          handleUpdate = {this.handleUpdate}/>
       </div>
     )
   }
