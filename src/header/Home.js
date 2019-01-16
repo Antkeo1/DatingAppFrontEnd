@@ -9,9 +9,12 @@ class Home extends Component {
     this.state = {
       profiles: []
     }
+    this.handleDelete = this.handleDelete.bind(this)
+    this.deleteProfile= this.deleteProfile.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.addNewProfile= this.addNewProfile.bind(this)
   }
+  //creating one profile
   handleFormSubmit = (username, profileimage, job, gender, race, interest, hobbies, race_preference) => {
     const home = JSON.stringify({
       profile: {username: username, profileimage: profileimage,
@@ -36,8 +39,28 @@ class Home extends Component {
     this.setState({
       profiles: this.state.profiles.concat(profile)
     })
-
   }
+  // delete profile
+  handleDelete(id){
+    fetch(`http://localhost:4741/profiles/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Token token=${this.props.user.token}`
+
+        }
+      }).then((response) => {
+      this.deleteProfile
+    })
+  }
+  deleteProfile(id){
+    newProfile = this.state.profiles.filter((profile) => profile.id !== id)
+    this.setState({
+      profiles: newProfile
+    })
+  }
+
   componentDidMount(){
     fetch(apiUrl + '/profiles')
       .then((response) => {return response.json()})
@@ -47,7 +70,7 @@ class Home extends Component {
     return(
       <div>
         <NewProfile handleFormSubmit={this.handleFormSubmit} />
-        <AllProfile profiles={this.state.profiles} />
+        <AllProfile profiles={this.state.profiles} handleDelete={this.handleDelete}/>
       </div>
     )
   }
