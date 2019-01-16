@@ -2,8 +2,8 @@ import React from 'react'
 const apiUrl = 'http://localhost:4741'
 
 const AllProfile = (props) => {
-  console.log(props.profiles)
   const profiles = props.profiles.map((profile) => {
+    console.log(props)
     return(
       <div key={profile.id}>
         <h1>{profile.username}</h1>

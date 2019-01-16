@@ -7,40 +7,36 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      profiles: [{
-        username:'',
-        profileimage:'',
-        job:'',
-        gender:'',
-        race:'',
-        interest:'',
-        hobbies:'',
-        race_preference:''
-      }]
+      profiles: []
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.addNewProfile= this.addNewProfile.bind(this)
   }
-  handleFormSubmit(username, profileimage, job, gender, race, interest, hobbies, race_preference){
-    const home = JSON.stringify({profiles: {username: username, profileimage: profileimage,
-      job: job, gender: gender, race: race, interest: interest,
-      hobbies: hobbies, race_preference: race_preference}  })
+  handleFormSubmit = (username, profileimage, job, gender, race, interest, hobbies, race_preference) => {
+    const home = JSON.stringify({
+      profile: {username: username, profileimage: profileimage,
+        job: job, gender: gender, race: race, interest: interest,
+        hobbies: hobbies, race_preference: race_preference}
+    })
     fetch(apiUrl + '/profiles', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':`Token token=${this.props.user.token}`
       },
-      body: body,
+      body: home
     }).then((response) => {return response.json()})
-      .then((profile)=>{
+      .then((profile) =>{
         this.addNewProfile(profile)
+        console.log(home)
       })
 
   }
-  addNewProfile(profile){
+  addNewProfile(profile) {
     this.setState({
-      profile: this.state.profiles.concat(profile)
+      profiles: this.state.profiles.concat(profile)
     })
+
   }
   componentDidMount(){
     fetch(apiUrl + '/profiles')
