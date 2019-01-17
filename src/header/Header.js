@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import NewProfile from './NewProfile'
+import ProfileEdit from './ProfileEdit'
 
 
 import './Header.scss'
@@ -15,7 +16,11 @@ const authenticatedOptions = (
   <React.Fragment>
     <Link to="/change-password">Change Password</Link>
     <Link to="/sign-out">Sign Out</Link>
-    <Link to="profiles">Create a Profile</Link>
+  </React.Fragment>
+)
+const newProfile = (
+  <React.Fragment>
+    <Link to='/NewProfile'>Create a Profile</Link>
   </React.Fragment>
 )
 

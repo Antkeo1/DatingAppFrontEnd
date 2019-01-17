@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
+import { Route, Link } from 'react-router-dom'
 const apiUrl = 'http://localhost:4741'
 import AllProfile from './AllProfile'
 import NewProfile from './NewProfile'
+import ProfileEdit from './ProfileEdit'
+import ProfileShow from './ProfileShow'
 
 class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      profiles: []
+      profiles: [],
+      showAll: true
     }
+    this.handleLike = this.handleLike.bind(this)
+    this.likeProfile = this.likeProfile.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.updateProfile = this.updateProfile.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.deleteProfile= this.deleteProfile.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.addNewProfile= this.addNewProfile.bind(this)
+  }
+  handleShowAll = () => {
+    if(this.state.showAll) {
+      this.setState({
+        showAll: false
+      })
+    }
   }
   //creating one profile
   handleFormSubmit = (username, profileimage, job, gender, race, interest, hobbies, race_preference) => {
@@ -33,10 +46,10 @@ class Home extends Component {
     }).then((response) => {return response.json()})
       .then((profile) =>{
         this.addNewProfile(profile)
-        console.log(home)
       })
 
   }
+
   addNewProfile(profile) {
     this.setState({
       profiles: this.state.profiles.concat(profile)
@@ -85,6 +98,27 @@ class Home extends Component {
     })
   }
 
+  handleLike(id){
+    fetch('http://localhost:4741/profiles/' + id,
+      {
+        method: 'PUT',
+        body: JSON.stringify({profile: id}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Token token=${this.props.user.token}`
+        }
+      }).then((response) => {
+      this.likeProfile(id)
+    })
+  }
+  likeProfile(id){
+    if(!this.state.liked){
+      this.setState({
+        liked: this.state.liked
+      })
+    }
+  }
+
   componentDidMount(){
     fetch(apiUrl + '/profiles')
       .then((response) => {return response.json()})
@@ -94,8 +128,10 @@ class Home extends Component {
     return(
       <div>
         <NewProfile handleFormSubmit={this.handleFormSubmit} />
-        <AllProfile profiles={this.state.profiles} handleDelete={this.handleDelete}
-          handleUpdate = {this.handleUpdate}/>
+        {ProfileShow}
+        {ProfileEdit}
+        {this.handleShowAll && (<AllProfile profiles={this.state.profiles} handleShowAll={this.handleShowAll} handleLike={this.handleLike} handleDelete={this.handleDelete}
+          handleUpdate = {this.handleUpdate}/>)}
       </div>
     )
   }

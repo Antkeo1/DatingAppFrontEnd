@@ -6,11 +6,14 @@ $charcoal: #bbb;
   display: flex;
   height: 100px;
   padding: 0 20px;
+  color: white;
+  background-color: blue;
 
   a,
   span {
     font-size: 1.2em;
     margin: 0 15px;
+    color: white;
   }
 }
 
@@ -29,6 +32,7 @@ $charcoal: #bbb;
     padding: 10px;
 
     h1 {
+      color: white;
       font-size: 2.5em;
     }
   }

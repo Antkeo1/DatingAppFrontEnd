@@ -10,6 +10,7 @@ import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 import AllProfile from './header/AllProfile'
 import Home from './header/Home'
+import NewProfile from './header/NewProfile'
 
 class App extends Component {
   constructor () {
@@ -59,7 +60,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword flash={this.flash} user={user} />
           )} />
-          
+        
+
           <AuthenticatedRoute user={user} exact path="/" render={() => (
             <Home flash={this.flash} user={user}/>
           )}/>
